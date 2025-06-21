@@ -1,40 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<form method="get" action="/" class="mb-3 d-flex">
-    <input type="text" name="search" class="form-control me-2" placeholder="Szukaj po numerze, nazwie lub kolorze" value="{{ search }}">
+<form method="get" action="/" class="mb-3 d-flex" role="search" aria-label="Wyszukaj produkty">
+    <input type="search" name="search" class="form-control me-2" placeholder="Szukaj po numerze, nazwie lub kolorze" value="{{ search }}">
     <button type="submit" class="btn btn-outline-primary">Szukaj</button>
 </form>
 
-<a href="/add" class="btn btn-primary mb-3">➕ Dodaj produkt</a>
+<a href="{{ url_for('add_product') }}" class="btn btn-primary mb-3">Dodaj produkt</a>
 
-<table class="table table-bordered table-hover bg-white">
-    <thead>
+<table class="table table-bordered table-hover bg-white align-middle">
+    <thead class="table-light">
         <tr>
-            <th>ID</th>
             <th>Numer</th>
-            <th>Nazwa</th>
-            <th>Kolor</th>
-            <th>Ilość</th>
-            <th>Akcje</th>
+            <th>Przykładowa nazwa</th>
+            <th>Przykładowy kolor</th>
+            <th>Łączna ilość</th>
         </tr>
     </thead>
     <tbody>
-        {% for product in products %}
+        {% for group in groups %}
         <tr>
-            <td>{{ product[0] }}</td>
-            <td>{{ product[1] }}</td>
-            <td>{{ product[2] }}</td>
-            <td>{{ product[3] }}</td>
-            <td>{{ product[4] }}</td>
-        <td class="d-flex gap-2">
-    <a href="/edit/{{ product[0] }}" class="btn btn-sm btn-warning">Edytuj</a>
-    <form action="/delete/{{ product[0] }}" method="post" onsubmit="return confirm('Na pewno usunąć ten produkt?')" style="display:inline;">
-        <button type="submit" class="btn btn-sm btn-danger">Usuń</button>
-    </form>
-</td>
-
+            <td><a href="{{ url_for('group_detail', number=group[0]) }}">{{ group[0] }}</a></td>
+            <td>{{ group[1] }}</td>
+            <td>{{ group[2] }}</td>
+            <td>{{ group[3] }}</td>
         </tr>
+        {% else %}
+        <tr><td colspan="4" class="text-center">Brak produktów</td></tr>
         {% endfor %}
     </tbody>
 </table>

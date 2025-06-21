@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Produkty o numerze: {{ number }}</h2>
+
+<a href="{{ url_for('add_product') }}" class="btn btn-primary mb-3">Dodaj produkt</a>
+
+<table class="table table-bordered table-hover bg-white align-middle">
+    <thead class="table-light">
+        <tr>
+            <th>ID</th>
+            <th>Nazwa</th>
+            <th>Kolor</th>
+            <th>Ilość</th>
+            <th>Zdjęcie</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product[0] }}</td>
+            <td>{{ product[2] }}</td>
+            <td>{{ product[3] }}</td>
+            <td>{{ product[4] }}</td>
+            <td>
+                {% if product[5] %}
+                <img src="{{ product[5] }}" alt="Zdjęcie" style="max-height: 80px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.3);">
+                {% else %}
+                Brak
+                {% endif %}
+            </td>
+            <td class="d-flex gap-2">
+                <a href="{{ url_for('edit_product', product_id=product[0]) }}" class="btn btn-sm btn-warning">Edytuj</a>
+                <form action="{{ url_for('delete_product', product_id=product[0]) }}" method="post" onsubmit="return confirm('Na pewno usunąć ten produkt?')" style="display:inline;">
+                    <button type="submit" class="btn btn-sm btn-danger">Usuń</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="text-center">Brak produktów w tej grupie</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">← Wróć do listy grup</a>
+{% endblock %}

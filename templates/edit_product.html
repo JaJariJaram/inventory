@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Edytuj produkt</h2>
-<form method="post" class="bg-white p-4 rounded shadow-sm">
+<form method="post" novalidate>
     <div class="mb-3">
-        <label class="form-label">Numer</label>
-        <input type="text" name="number" class="form-control" value="{{ product[1] }}" required>
+        <label for="number" class="form-label">Numer</label>
+        <input type="text" class="form-control" id="number" name="number" required value="{{ product[1] }}">
     </div>
     <div class="mb-3">
-        <label class="form-label">Nazwa</label>
-        <input type="text" name="name" class="form-control" value="{{ product[2] }}" required>
+        <label for="name" class="form-label">Nazwa</label>
+        <input type="text" class="form-control" id="name" name="name" required value="{{ product[2] }}">
     </div>
     <div class="mb-3">
-        <label class="form-label">Kolor</label>
-        <input type="text" name="color" class="form-control" value="{{ product[3] }}" required>
+        <label for="color" class="form-label">Kolor</label>
+        <input type="text" class="form-control" id="color" name="color" required value="{{ product[3] }}">
     </div>
     <div class="mb-3">
-        <label class="form-label">Ilość</label>
-        <input type="number" name="quantity" class="form-control" value="{{ product[4] }}" required>
+        <label for="quantity" class="form-label">Ilość</label>
+        <input type="number" class="form-control" id="quantity" name="quantity" required min="0" value="{{ product[4] }}">
     </div>
-    <button type="submit" class="btn btn-success">Zapisz zmiany</button>
-    <a href="/" class="btn btn-secondary">Anuluj</a>
+    <div class="mb-3">
+        <label for="image_url" class="form-label">URL zdjęcia (opcjonalnie)</label>
+        <input type="url" class="form-control" id="image_url" name="image_url" value="{{ product[5] }}">
+    </div>
+    <button type="submit" class="btn btn-success">Zapisz</button>
+    <a href="{{ url_for('group_detail', number=product[1]) }}" class="btn btn-secondary">Anuluj</a>
 </form>
 {% endblock %}
