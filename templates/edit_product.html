@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edytuj produkt</h2>
+<form method="post" class="bg-white p-4 rounded shadow-sm">
+    <div class="mb-3">
+        <label class="form-label">Numer</label>
+        <input type="text" name="number" class="form-control" value="{{ product[1] }}" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Nazwa</label>
+        <input type="text" name="name" class="form-control" value="{{ product[2] }}" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Kolor</label>
+        <input type="text" name="color" class="form-control" value="{{ product[3] }}" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Ilość</label>
+        <input type="number" name="quantity" class="form-control" value="{{ product[4] }}" required>
+    </div>
+    <button type="submit" class="btn btn-success">Zapisz zmiany</button>
+    <a href="/" class="btn btn-secondary">Anuluj</a>
+</form>
+{% endblock %}

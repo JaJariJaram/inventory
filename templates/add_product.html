@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="post" class="bg-white p-4 rounded shadow-sm">
+    <div class="mb-3">
+        <label class="form-label">Numer</label>
+        <input type="text" name="number" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Nazwa</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Kolor</label>
+        <input type="text" name="color" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Ilość</label>
+        <input type="number" name="quantity" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Dodaj</button>
+    <a href="/" class="btn btn-secondary">Wróć</a>
+</form>
+{% endblock %}

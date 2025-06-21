@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form method="get" action="/" class="mb-3 d-flex">
+    <input type="text" name="search" class="form-control me-2" placeholder="Szukaj po numerze, nazwie lub kolorze" value="{{ search }}">
+    <button type="submit" class="btn btn-outline-primary">Szukaj</button>
+</form>
+
+<a href="/add" class="btn btn-primary mb-3">➕ Dodaj produkt</a>
+
+<table class="table table-bordered table-hover bg-white">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Numer</th>
+            <th>Nazwa</th>
+            <th>Kolor</th>
+            <th>Ilość</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product[0] }}</td>
+            <td>{{ product[1] }}</td>
+            <td>{{ product[2] }}</td>
+            <td>{{ product[3] }}</td>
+            <td>{{ product[4] }}</td>
+        <td class="d-flex gap-2">
+    <a href="/edit/{{ product[0] }}" class="btn btn-sm btn-warning">Edytuj</a>
+    <form action="/delete/{{ product[0] }}" method="post" onsubmit="return confirm('Na pewno usunąć ten produkt?')" style="display:inline;">
+        <button type="submit" class="btn btn-sm btn-danger">Usuń</button>
+    </form>
+</td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
